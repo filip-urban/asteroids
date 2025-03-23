@@ -42,18 +42,26 @@ def main():
         screen.fill(color)
         updatable.update(dt)
         for asteroid in asteroids:
-            for shot in shots:
-                if asteroid.check_collision(shot):
-                    asteroid.split(asteroid_field)
-                    shot.kill()
-                    break
-
             if player.check_collision(asteroid):
                 player.get_hit()
                 asteroid.bounce(player.position)
                 if not player.has_lives():
                     print("Game over!")
                     return
+
+            for other_asteroid in asteroids:
+                if asteroid == other_asteroid:
+                    continue
+                if asteroid.check_collision(other_asteroid):
+                    asteroid.bounce(other_asteroid.position)
+                    other_asteroid.bounce(asteroid.position)
+
+            for shot in shots:
+                if asteroid.check_collision(shot):
+                    asteroid.split(asteroid_field)
+                    shot.kill()
+                    break
+
         for drawable_object in drawable:
             drawable_object.draw(screen)
 

@@ -6,6 +6,7 @@ from constants import (
     PLAYER_SPEED,
     PLAYER_SHOT_SPEED,
     PLAYER_SHOOT_COOLDOWN,
+    PLAYER_LIVES,
 )
 from shot import Shot
 
@@ -15,6 +16,7 @@ class Player(CircleShape):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         self.shoot_cooldown_timer = 0
+        self.lives = PLAYER_LIVES
 
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -54,3 +56,9 @@ class Player(CircleShape):
         shot = Shot(self.position.x, self.position.y)
         shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOT_SPEED
         self.shoot_cooldown_timer = PLAYER_SHOOT_COOLDOWN
+
+    def get_hit(self):
+        self.lives -= 1
+
+    def has_lives(self):
+        return self.lives > 0

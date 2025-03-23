@@ -44,8 +44,10 @@ def main():
                     break
 
             if player.check_collision(asteroid):
-                print("Game over!")
-                return
+                player.get_hit()
+                if not player.has_lives():
+                    print("Game over!")
+                    return
         for drawable_object in drawable:
             drawable_object.draw(screen)
         pygame.display.flip()

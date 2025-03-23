@@ -7,6 +7,7 @@ from constants import (
     PLAYER_SHOT_SPEED,
     PLAYER_SHOOT_COOLDOWN,
     PLAYER_LIVES,
+    PLAYER_INVINCIBILITY_PERIOD,
 )
 from shot import Shot
 
@@ -17,6 +18,7 @@ class Player(CircleShape):
         self.rotation = 0
         self.shoot_cooldown_timer = 0
         self.lives = PLAYER_LIVES
+        self.invulnerability_period = 0
 
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -58,7 +60,11 @@ class Player(CircleShape):
         self.shoot_cooldown_timer = PLAYER_SHOOT_COOLDOWN
 
     def get_hit(self):
+        if self.invulnerability_period > 0:
+            self.invulnerability_period -= 1
+            return
         self.lives -= 1
+        self.invulnerability_period = PLAYER_INVINCIBILITY_PERIOD
 
     def has_lives(self):
         return self.lives > 0

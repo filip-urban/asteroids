@@ -50,6 +50,7 @@ def main():
 
             if player.check_collision(asteroid):
                 player.get_hit()
+                asteroid.bounce(player.position)
                 if not player.has_lives():
                     print("Game over!")
                     return

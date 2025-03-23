@@ -31,3 +31,8 @@ class Asteroid(CircleShape):
                 -new_velocity,
             )
         self.kill()
+
+    def bounce(self, other):
+        self.velocity = pygame.Vector2(
+            self.position.x - other.x, self.position.y - other.y
+        )

@@ -18,7 +18,7 @@ class Player(CircleShape):
         self.rotation = 0
         self.shoot_cooldown_timer = 0
         self.lives = PLAYER_LIVES
-        self.invulnerability_period = 0
+        self.invinciblity_timer = 0
 
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -40,6 +40,8 @@ class Player(CircleShape):
 
     def update(self, dt):
         self.shoot_cooldown_timer -= dt
+        if self.invinciblity_timer > 0:
+            self.invinciblity_timer -= 1
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a]:
             self.rotate(-dt)
@@ -60,11 +62,10 @@ class Player(CircleShape):
         self.shoot_cooldown_timer = PLAYER_SHOOT_COOLDOWN
 
     def get_hit(self):
-        if self.invulnerability_period > 0:
-            self.invulnerability_period -= 1
+        if self.invinciblity_timer > 0:
             return
         self.lives -= 1
-        self.invulnerability_period = PLAYER_INVINCIBILITY_PERIOD
+        self.invinciblity_timer = PLAYER_INVINCIBILITY_PERIOD
 
     def has_lives(self):
         return self.lives > 0

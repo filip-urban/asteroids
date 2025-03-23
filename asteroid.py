@@ -16,7 +16,7 @@ class Asteroid(CircleShape):
     def update(self, dt):
         self.position += self.velocity * dt
 
-    def split(self, asteroid_field):
+    def split(self):
         if self.radius > ASTEROID_MIN_RADIUS:
             new_velocity = 1.2 * self.velocity.rotate(random.uniform(20, 50))
             new_radius = self.radius - ASTEROID_MIN_RADIUS

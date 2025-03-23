@@ -1,4 +1,5 @@
 import pygame
+import pygame.freetype
 from constants import *
 from player import Player
 from shot import Shot
@@ -10,12 +11,16 @@ def main():
     print("Starting Asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
+    # window name
+    pygame.display.set_caption("Asteroids")
     # surface
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     color = (0, 0, 0)
     # clock
     clock = pygame.time.Clock()
     dt = 0
+    # font
+    font = pygame.font.Font("freesansbold.ttf", FONT_SIZE)
     # groups
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
@@ -50,6 +55,13 @@ def main():
                     return
         for drawable_object in drawable:
             drawable_object.draw(screen)
+
+        # text showing lives
+        lives_text = font.render(f"Lives: {player.lives}", True, (255, 255, 255))
+        text_rectangle = lives_text.get_rect()
+        text_rectangle.center = (SCREEN_WIDTH * 0.94, SCREEN_HEIGHT * 0.06)
+        screen.blit(lives_text, text_rectangle)
+
         pygame.display.flip()
         dt = clock.tick(60) / 1000
 

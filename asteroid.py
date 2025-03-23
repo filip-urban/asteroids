@@ -35,6 +35,6 @@ class Asteroid(CircleShape):
             other.position
         )
         self.velocity = self.velocity.rotate(new_angle)
-        vector_to_other.scale_to_length(overlap / 2)
+        vector_to_other.scale_to_length(1.1 * overlap / 2)
         self.position += vector_to_other
         other.position -= vector_to_other

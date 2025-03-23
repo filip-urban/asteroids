@@ -52,9 +52,9 @@ def main():
             for other_asteroid in asteroids:
                 if asteroid == other_asteroid:
                     continue
-                if asteroid.check_collision(other_asteroid):
-                    asteroid.bounce(other_asteroid.position)
-                    other_asteroid.bounce(asteroid.position)
+                # if asteroid.check_collision(other_asteroid):
+                # asteroid.bounce(other_asteroid.position)
+                # other_asteroid.bounce(asteroid.position)
 
             for shot in shots:
                 if asteroid.check_collision(shot):

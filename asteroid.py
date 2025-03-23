@@ -27,7 +27,14 @@ class Asteroid(CircleShape):
         self.kill()
 
     def bounce(self, other):
-        new_angle = self.position.angle_to(
-            pygame.Vector2(self.position.x - other.x, self.position.y - other.y)
+        vector_to_other = pygame.Vector2(
+            self.position.x - other.position.x, self.position.y - other.position.y
+        )
+        new_angle = self.position.angle_to(vector_to_other)
+        overlap = (self.radius + other.radius) - self.position.distance_to(
+            other.position
         )
         self.velocity = self.velocity.rotate(new_angle)
+        vector_to_other.scale_to_length(overlap / 2)
+        self.position += vector_to_other
+        other.position -= vector_to_other

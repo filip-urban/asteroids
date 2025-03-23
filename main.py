@@ -44,7 +44,7 @@ def main():
         for asteroid in asteroids:
             if player.check_collision(asteroid):
                 player.get_hit()
-                asteroid.bounce(player.position)
+                asteroid.bounce(player)
                 if not player.has_lives():
                     print("Game over!")
                     return
@@ -52,9 +52,9 @@ def main():
             for other_asteroid in asteroids:
                 if asteroid == other_asteroid:
                     continue
-                # if asteroid.check_collision(other_asteroid):
-                # asteroid.bounce(other_asteroid.position)
-                # other_asteroid.bounce(asteroid.position)
+                if asteroid.check_collision(other_asteroid):
+                    asteroid.bounce(other_asteroid)
+                    other_asteroid.bounce(asteroid)
 
             for shot in shots:
                 if asteroid.check_collision(shot):

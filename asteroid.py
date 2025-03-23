@@ -34,7 +34,7 @@ class Asteroid(CircleShape):
         overlap = (self.radius + other.radius) - self.position.distance_to(
             other.position
         )
-        self.velocity = 1.1 * self.velocity.rotate(new_angle)
+        self.velocity = self.velocity.rotate(new_angle)
         vector_to_other.scale_to_length(1.1 * overlap / 2)
         self.position += vector_to_other
         other.position -= vector_to_other

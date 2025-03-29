@@ -69,13 +69,13 @@ def main():
             drawable_object.draw(screen)
 
         # text showing lives
-        lives_text = font.render(f"Lives: {player.lives}", True, (255, 255, 255))
+        lives_text = font.render(f"Lives: {player.lives}", True, "white")
         text_rectangle_lives = lives_text.get_rect()
         text_rectangle_lives.center = (SCREEN_WIDTH * 0.92, SCREEN_HEIGHT * 0.06)
         screen.blit(lives_text, text_rectangle_lives)
 
         # text showing score
-        score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+        score_text = font.render(f"Score: {score}", True, "white")
         text_rectangle_score = score_text.get_rect()
         text_rectangle_score.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT * 0.06)
         screen.blit(score_text, text_rectangle_score)

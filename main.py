@@ -35,6 +35,8 @@ def main():
     # Shots
     Shot.containers = (shots, updatable, drawable)
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    # score
+    score = 0
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -60,6 +62,7 @@ def main():
                 if asteroid.check_collision(shot):
                     asteroid.split()
                     shot.kill()
+                    score += 1
                     break
 
         for drawable_object in drawable:
@@ -67,9 +70,15 @@ def main():
 
         # text showing lives
         lives_text = font.render(f"Lives: {player.lives}", True, (255, 255, 255))
-        text_rectangle = lives_text.get_rect()
-        text_rectangle.center = (SCREEN_WIDTH * 0.94, SCREEN_HEIGHT * 0.06)
-        screen.blit(lives_text, text_rectangle)
+        text_rectangle_lives = lives_text.get_rect()
+        text_rectangle_lives.center = (SCREEN_WIDTH * 0.92, SCREEN_HEIGHT * 0.06)
+        screen.blit(lives_text, text_rectangle_lives)
+
+        # text showing score
+        score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+        text_rectangle_score = score_text.get_rect()
+        text_rectangle_score.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT * 0.06)
+        screen.blit(score_text, text_rectangle_score)
 
         pygame.display.flip()
         dt = clock.tick(60) / 1000
